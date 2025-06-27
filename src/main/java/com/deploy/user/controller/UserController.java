@@ -1,4 +1,4 @@
-package com.deploy.user.controller;
+ package com.deploy.user.controller;
 
 import java.util.List;
 
@@ -34,6 +34,11 @@ ServiceImpl s;
 		return new ResponseEntity<List<AppUser>>(s.getAllUser(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/welcome message")
+	public String welcome(){
+		return "welcome to user service";
+	}
+
 	@GetMapping("/{id}")
 	@Cacheable(value = "Users", key = "#id")
 	public ResponseEntity<AppUser> getUserById(@PathVariable int id) throws InvalidUserException{

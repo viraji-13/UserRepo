@@ -34,7 +34,7 @@ ServiceImpl s;
 		return new ResponseEntity<List<AppUser>>(s.getAllUser(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/welcome message")
+	@GetMapping("/welcome")
 	public String welcome(){
 		return "welcome to user service";
 	}

@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.deploy.user.service.ServiceImpl;
 import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin("*")
 public class UserController {
 
 @Autowired
@@ -33,6 +35,8 @@ ServiceImpl s;
 	public ResponseEntity<List<AppUser>> getAllUser(){
 		return new ResponseEntity<List<AppUser>>(s.getAllUser(), HttpStatus.OK);
 	}
+	
+	
 	
 	@GetMapping("/welcome")
 	public String welcome(){
@@ -44,6 +48,11 @@ ServiceImpl s;
 	public ResponseEntity<AppUser> getUserById(@PathVariable int id) throws InvalidUserException{
 		System.out.println("get method called");
 		return new ResponseEntity<AppUser>(s.getUserById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/auth/{username}/{password}")
+	public ResponseEntity<AppUser> authuser(@PathVariable String username ,@PathVariable String password){
+		return new ResponseEntity<AppUser>(s.authUser(username,password), HttpStatus.OK);
 	}
 	
 	@PostMapping("/")

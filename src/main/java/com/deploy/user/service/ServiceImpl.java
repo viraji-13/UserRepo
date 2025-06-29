@@ -71,6 +71,19 @@ UserRepo ur;
 		else throw new InvalidUserException("No user found");
 	}
 
+	public AppUser authUser(String username, String password) throws InvalidUserException {
+		Optional<AppUser> o = ur.findByUserName(username);
+		if(o.isPresent()) {
+			AppUser au = o.get();
+			if(au.getPassword().equals(password)) {
+				return au;
+			}
+			else throw new InvalidUserException("no user found");
+		}
+		
+		else throw new InvalidUserException("no user found");
+	}
+
 	
 
 }
